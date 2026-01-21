@@ -1,0 +1,55 @@
+name: finceiro_app
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^6.0.0
+
+
+flutter:
+
+  uses-material-design: true
+
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter/Inter_18pt-Regular.ttf
+        - asset: fonts/Inter/Inter_18pt-Medium.ttf
+          weight: 500
+        - asset: fonts/Inter/Inter_18pt-Bold.ttf
+          weight: 700
+
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: fonts/Plus_Jakarta_Sans/PlusJakartaSans-Regular.ttf
+        - asset: fonts/Plus_Jakarta_Sans/PlusJakartaSans-Medium.ttf
+          weight: 500
+        - asset: fonts/Plus_Jakarta_Sans/PlusJakartaSans-Bold.ttf
+          weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
