@@ -1,4 +1,6 @@
+import 'package:finceiro_app/components/home/card_receitas.dart';
 import 'package:finceiro_app/components/home/card_valor_total.dart';
+import 'package:finceiro_app/components/home/grafico_gastos.dart';
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -32,24 +34,21 @@ class HomePage extends StatelessWidget {
           children: [
             CardValorTotal(),
             SizedBox(height: 20),
-            Row(
+            ReceitaTotal(),
+            SizedBox(height: 20),
+            GraficoGastos(),
+            SizedBox(height: 20),
+            Column(
+              crossAxisAlignment: .start,
               children: [
-                Expanded(
-                  child: CardReceitas(
-                    titulo: 'Receitas',
-                    icon: Icons.arrow_upward,
-                    iconBgColor: AppColors.chart3,
-                    valor: '\$5,000.00',
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: CardReceitas(
-                    titulo: 'Despesas',
-                    icon: Icons.arrow_downward,
-                    iconBgColor: AppColors.destructive,
-                    valor: '\$5,000.00',
-                  ),
+                Text('Últimas transações', style: AppTextStyles.text18),
+                SizedBox(height: 10),
+                TransacaoItem(
+                  icon: '🍕',
+                  title: 'Pizza',
+                  value: 'R\$ 12,45',
+                  date: '12/02/2023',
+                  description: 'Restaurante',
                 ),
               ],
             ),
@@ -60,42 +59,43 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class CardReceitas extends StatelessWidget {
-  final String titulo;
-  final IconData icon;
-  final Color iconBgColor;
-  final String valor;
-  const CardReceitas({
+class TransacaoItem extends StatelessWidget {
+  final String? title;
+  final String? description;
+  final String? date;
+  final String? value;
+  final String icon;
+
+  const TransacaoItem({
     super.key,
-    required this.titulo,
+    this.title,
+    this.value,
     required this.icon,
-    required this.iconBgColor,
-    required this.valor,
+    this.description,
+    this.date,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: .symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: AppColors.card,
         border: Border.all(color: AppColors.border),
         borderRadius: BorderRadius.circular(14),
       ),
       child: ListTile(
-        horizontalTitleGap: 10,
-        contentPadding: .symmetric(horizontal: 10, vertical: 12),
-        leading: Container(
-          padding: .symmetric(horizontal: 8, vertical: 8),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: iconBgColor,
-          ),
-          child: Icon(icon, size: 16, color: AppColors.background),
-        ),
-        title: Text(titulo, style: AppTextStyles.text20),
+        onTap: () {},
+        contentPadding: .zero,
+        leading: Text(icon, style: AppTextStyles.text20),
+        title: Text(title ?? 'Receita', style: AppTextStyles.text16Bold),
         subtitle: Text(
-          valor,
-          style: AppTextStyles.text20Bold.copyWith(color: iconBgColor),
+          '$description - $date',
+          style: AppTextStyles.text14.copyWith(color: AppColors.foreground),
+        ),
+        trailing: Text(
+          '+ R\$ $value',
+          style: AppTextStyles.text16Bold.copyWith(color: AppColors.chart3),
         ),
       ),
     );

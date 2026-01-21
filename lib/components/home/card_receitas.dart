@@ -42,3 +42,34 @@ class CardReceitas extends StatelessWidget {
     );
   }
 }
+
+class ReceitaTotal extends StatelessWidget {
+  const ReceitaTotal({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: CardReceitas(
+            titulo: 'Receitas',
+            icon: Icons.arrow_upward,
+            iconBgColor: AppColors.chart3,
+            valor: '\$5,000.00',
+          ),
+        ),
+        SizedBox(width: 10),
+        Expanded(
+          child: CardReceitas(
+            titulo: 'Despesas',
+            icon: Icons.arrow_downward,
+            iconBgColor: AppColors.destructive,
+            valor: '\$5,000.00',
+          ),
+        ),
+      ],
+    );
+  }
+}
