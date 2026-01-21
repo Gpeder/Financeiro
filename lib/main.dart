@@ -1,5 +1,4 @@
 import 'package:finceiro_app/theme/theme.dart';
-import 'package:finceiro_app/views/home_page.dart';
 import 'package:finceiro_app/views/root_page/root_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +14,27 @@ class FinceiroApp extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Finceiro App',
       home: const RootPage(),
     );
   }
 }
+
+
+
+      /*
+      
+
+
+       */
+
+      /*
+      ShadApp(
+      home: const RootPage(),
+      themeMode: ThemeMode.dark,
+      darkTheme: ShadThemeData(
+        brightness: Brightness.dark,
+        colorScheme: const ShadSlateColorScheme.dark(),
+      ),
+    );
+       */

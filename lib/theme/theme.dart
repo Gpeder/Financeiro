@@ -181,6 +181,9 @@ class AppTextStyles {
 
 // Cores
 class AppColors {
+  // Cor snack
+  static const Color snackBackground = Color(0xFF242131);
+  
   // Cores Principais
   static const Color primary = Color(0xFFA995C9);
   static const Color onPrimary = Color(0xFF1A1823);

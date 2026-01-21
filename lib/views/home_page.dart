@@ -44,12 +44,23 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
-        onPressed: () {},
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: (_) => MainModal());
+        },
         child: Icon(Icons.add),
       ),
     );
+  }
+}
+
+class MainModal extends StatelessWidget {
+  const MainModal({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
