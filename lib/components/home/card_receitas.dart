@@ -1,5 +1,6 @@
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class CardReceitas extends StatelessWidget {
   final String titulo;
@@ -33,7 +34,7 @@ class CardReceitas extends StatelessWidget {
           ),
           child: Icon(icon, size: 16, color: AppColors.background),
         ),
-        title: Text(titulo, style: AppTextStyles.text20),
+        title: Text(titulo, style: AppTextStyles.text18),
         subtitle: Text(
           valor,
           style: AppTextStyles.text20Bold.copyWith(color: iconBgColor),
@@ -54,8 +55,8 @@ class ReceitaTotal extends StatelessWidget {
       children: [
         Expanded(
           child: CardReceitas(
-            titulo: 'Receitas',
-            icon: Icons.arrow_upward,
+            titulo: 'Receita',
+            icon: Ionicons.trending_up,
             iconBgColor: AppColors.chart3,
             valor: '\$5,000.00',
           ),
@@ -64,7 +65,7 @@ class ReceitaTotal extends StatelessWidget {
         Expanded(
           child: CardReceitas(
             titulo: 'Despesas',
-            icon: Icons.arrow_downward,
+            icon: Ionicons.trending_down,
             iconBgColor: AppColors.destructive,
             valor: '\$5,000.00',
           ),

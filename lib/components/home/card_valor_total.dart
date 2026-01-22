@@ -1,5 +1,6 @@
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class CardValorTotal extends StatelessWidget {
   const CardValorTotal({
@@ -27,7 +28,7 @@ class CardValorTotal extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.remove_red_eye_outlined),
+                  icon: Icon(Ionicons.eye_outline),
                   color: AppColors.background,
                   iconSize: 24,
                 ),

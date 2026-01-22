@@ -20,6 +20,11 @@ dependencies:
   shadcn_ui: ^0.43.4
   intl: ^0.20.2
   csv: ^6.0.0
+  ionicons: ^0.2.2
+  mask_input_formatter: ^0.0.3
+  mask_text_input_formatter: ^2.9.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

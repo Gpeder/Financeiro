@@ -1,12 +1,17 @@
 import 'package:finceiro_app/widgets/main_form.dart';
 import 'package:finceiro_app/widgets/main_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class MainModal extends StatelessWidget {
   const MainModal({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final valorController = TextEditingController();
+    final descricaoController = TextEditingController();
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.65,
       child: Padding(
@@ -19,10 +24,10 @@ class MainModal extends StatelessWidget {
                 children: [
                   MainForm(
                     label: 'Valor',
-                    prefixIcon: Icon(Icons.attach_money),
+                    prefixIcon: Icon(Ionicons.cash),
                     keyboardType: TextInputType.number,
                     inputFormatters: [],
-                    controller: TextEditingController(),
+                    controller: valorController,
                     validator: (value) => 'Campo obrigatório',
                     hint: 'R\$ 0,00',
                   ),
@@ -30,7 +35,7 @@ class MainModal extends StatelessWidget {
                   MainForm(
                     label: 'Descrição',
                     keyboardType: TextInputType.text,
-                    controller: TextEditingController(),
+                    controller: descricaoController,
                     validator: (value) => 'Campo obrigatório',
                     hint: 'Ex: Supermercado, farmácia, etc...',
                   ),
@@ -59,9 +64,10 @@ class MainModal extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   MainDatePicker(
+                    suffixIcon: Icon(null),
+                    prefixIcon: Icon(Ionicons.calendar),
                     label: 'Data',
                     validator: (value) => 'Campo obrigatório',
-                    prefixIcon: Icon(Icons.calendar_today),
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2100),
                     value: DateTime.now(),
@@ -76,7 +82,7 @@ class MainModal extends StatelessWidget {
                 children: [
                   MainForm(
                     label: 'Valor',
-                    prefixIcon: Icon(Icons.attach_money),
+                    prefixIcon: Icon(Ionicons.cash),
                     keyboardType: TextInputType.number,
                     inputFormatters: [],
                     controller: TextEditingController(),
@@ -112,8 +118,9 @@ class MainModal extends StatelessWidget {
                   SizedBox(height: 16),
                   MainDatePicker(
                     label: 'Data',
+                    suffixIcon: Icon(null),
+                    prefixIcon: Icon(Ionicons.calendar),
                     validator: (value) => 'Campo obrigatório',
-                    prefixIcon: Icon(Icons.calendar_today),
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2100),
                     value: DateTime.now(),

@@ -3,6 +3,7 @@ import 'package:finceiro_app/views/home_page.dart';
 import 'package:finceiro_app/views/perfil_page.dart';
 import 'package:finceiro_app/views/transacoes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -44,9 +45,9 @@ class _RootPageState extends State<RootPage> {
           destinations: const [
             NavigationDestination(
               tooltip: 'Dashboard',
-              icon: Icon(Icons.dashboard_outlined, size: 32),
+              icon: Icon(Ionicons.grid_outline, size: 32),
               selectedIcon: Icon(
-                Icons.dashboard,
+                Ionicons.grid,
                 color: AppColors.primary,
                 size: 32,
               ),
@@ -54,9 +55,9 @@ class _RootPageState extends State<RootPage> {
             ),
             NavigationDestination(
               tooltip: 'Transações',
-              icon: Icon(Icons.list_alt_outlined, size: 32),
+              icon: Icon(Ionicons.list_outline, size: 32),
               selectedIcon: Icon(
-                Icons.list_alt,
+                Ionicons.list,
                 color: AppColors.primary,
                 size: 32,
               ),
@@ -64,9 +65,9 @@ class _RootPageState extends State<RootPage> {
             ),
             NavigationDestination(
               tooltip: 'Perfil',
-              icon: Icon(Icons.person_outline, size: 32),
+              icon: Icon(Ionicons.person_outline, size: 32),
               selectedIcon: Icon(
-                Icons.person,
+                Ionicons.person,
                 color: AppColors.primary,
                 size: 32,
               ),

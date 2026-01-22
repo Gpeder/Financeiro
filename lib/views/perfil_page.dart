@@ -1,5 +1,10 @@
+import 'package:finceiro_app/components/perfil/configuracoes_tema.dart';
+import 'package:finceiro_app/components/perfil/dados_usuario.dart';
+import 'package:finceiro_app/components/perfil/resumo_mensal.dart';
 import 'package:finceiro_app/theme/theme.dart';
+import 'package:finceiro_app/widgets/main_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class PerfilPage extends StatelessWidget {
   const PerfilPage({super.key});
@@ -27,8 +32,23 @@ class PerfilPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Column(children: [
-            
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            DadosUsuario(),
+            SizedBox(height: 20),
+            ResumoMensal(),
+            SizedBox(height: 20),
+            ConfiguracoesTema(),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: MainOutlinedButton(
+                label: 'Sair da conta',
+                icon: Ionicons.log_out_outline,
+                onPressed: () {},
+              ),
+            ),
           ],
         ),
       ),
