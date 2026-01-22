@@ -56,7 +56,7 @@ class TransacaoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: .symmetric(horizontal: 16, vertical: 10),
+      padding: .symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.card,
         border: Border.all(color: AppColors.border),

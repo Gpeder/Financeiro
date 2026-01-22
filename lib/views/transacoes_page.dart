@@ -1,3 +1,5 @@
+import 'package:finceiro_app/components/home/lista_transacao_item.dart';
+import 'package:finceiro_app/components/transacoes/filtro_categorias.dart';
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:finceiro_app/widgets/main_form.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,9 @@ class TransacoesPage extends StatelessWidget {
               onChanged: (_) {},
             ),
             SizedBox(height: 20),
+            ListaFiltro(),
+            SizedBox(height: 20),
+            ListaTrasacaoItem()
           ],
         ),
       ),
