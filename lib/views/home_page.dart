@@ -2,6 +2,7 @@ import 'package:finceiro_app/components/home/card_receitas.dart';
 import 'package:finceiro_app/components/home/card_valor_total.dart';
 import 'package:finceiro_app/components/home/grafico_gastos.dart';
 import 'package:finceiro_app/components/home/lista_transacao_item.dart';
+import 'package:finceiro_app/components/home/modal_homepage.dart';
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (_) => MainModal());
+          showModalBottomSheet(context: context, isScrollControlled: true, builder: (_) => MainModal());
         },
         child: Icon(Icons.add),
       ),
@@ -54,13 +55,4 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class MainModal extends StatelessWidget {
-  const MainModal({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}

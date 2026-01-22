@@ -183,7 +183,7 @@ class AppTextStyles {
 class AppColors {
   // Cor snack
   static const Color snackBackground = Color(0xFF242131);
-  
+
   // Cores Principais
   static const Color primary = Color(0xFFA995C9);
   static const Color onPrimary = Color(0xFF1A1823);
@@ -214,4 +214,40 @@ class AppColors {
   static const Color chart3 = Color(0xFF77B8A1);
   static const Color chart4 = Color(0xFFF0C88D);
   static const Color chart5 = Color(0xFFA0BBE3);
+}
+
+class AppButtonStyles {
+  static final ButtonStyle primary = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.primary,
+    foregroundColor: AppColors.onPrimary,
+    disabledBackgroundColor: AppColors.muted,
+    disabledForegroundColor: AppColors.onMuted,
+    elevation: 0,
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    textStyle: AppTextStyles.text16Bold,
+  );
+
+  static final ButtonStyle destructive = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.destructive,
+    foregroundColor: AppColors.onPrimary,
+    disabledBackgroundColor: AppColors.muted,
+    disabledForegroundColor: AppColors.onMuted,
+    elevation: 0,
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    textStyle: AppTextStyles.text16Bold,
+  );
+
+  static final ButtonStyle outline = ElevatedButton.styleFrom(
+    backgroundColor: Colors.transparent,
+    foregroundColor: AppColors.foreground,
+    elevation: 0,
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+      side: const BorderSide(color: AppColors.border),
+    ),
+    textStyle: AppTextStyles.text16Bold,
+  );
 }
