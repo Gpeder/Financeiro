@@ -1,8 +1,12 @@
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:finceiro_app/views/root_page/root_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('transacoes');
   runApp(const FinceiroApp());
 }
 
@@ -19,22 +23,3 @@ class FinceiroApp extends StatelessWidget {
     );
   }
 }
-
-
-
-      /*
-      
-
-
-       */
-
-      /*
-      ShadApp(
-      home: const RootPage(),
-      themeMode: ThemeMode.dark,
-      darkTheme: ShadThemeData(
-        brightness: Brightness.dark,
-        colorScheme: const ShadSlateColorScheme.dark(),
-      ),
-    );
-       */

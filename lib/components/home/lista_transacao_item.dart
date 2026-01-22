@@ -1,4 +1,3 @@
-import 'package:finceiro_app/model/transacao_model.dart';
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -18,15 +17,14 @@ class ListaTrasacaoItem extends StatelessWidget {
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: transacoesExemplo.length,
+          itemCount: 10,
           itemBuilder: (context, index) {
-            final item = transacoesExemplo[index];
             return TransacaoItem(
-              title: item.title,
-              description: item.description,
+              title: 'Salário',
+              description: 'Descrição da transação',
               date:
-                  '${item.date.day}/${item.date.month}/${item.date.year}',
-              value: item.value.toStringAsFixed(2),
+                  '01/01/2024',
+              value: '1000.00',
               icon: '💼',
             );
           },
