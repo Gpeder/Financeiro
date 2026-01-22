@@ -17,7 +17,9 @@ class TransacaoService {
   List<Map<String, dynamic>> buscarTodas() {
     try {
       print('🔍 Buscando todas as transações');
-      final result = _box.values.cast<Map<String, dynamic>>().toList();
+      final result = _box.values
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
       print('✅ ${result.length} transações encontradas');
       return result;
     } catch (e) {

@@ -28,12 +28,16 @@ class TransacaoModel {
   };
 
   factory TransacaoModel.fromMap(Map map) => TransacaoModel(
-    id: map['id'],
-    titulo: map['titulo'],
-    valor: map['valor'],
-    categoria: map['categoria'],
-    data: DateTime.parse(map['data']),
-    isDespesa: map['isDespesa'],
-    description: map['description'],
+    id: map['id'] ?? '',
+    titulo: map['titulo'] ?? '',
+    valor: map['valor'] is double
+        ? map['valor']
+        : double.tryParse(map['valor'].toString()) ?? 0,
+    categoria: map['categoria'] ?? '',
+    data: map['data'] is DateTime
+        ? map['data']
+        : DateTime.tryParse(map['data'] ?? '') ?? DateTime.now(),
+    isDespesa: map['isDespesa'] ?? true,
+    description: map['description'] ?? '',
   );
 }

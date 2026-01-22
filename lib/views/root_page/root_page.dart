@@ -15,16 +15,17 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   int _selectIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    const TransacoesPage(),
-    const PerfilPage(),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectIndex],
-
+      body: IndexedStack(
+        index: _selectIndex,
+        children: const [
+          HomePage(),
+          TransacoesPage(),
+          PerfilPage(),
+        ],
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(top: 5),
         child: NavigationBar(
@@ -79,3 +80,4 @@ class _RootPageState extends State<RootPage> {
     );
   }
 }
+

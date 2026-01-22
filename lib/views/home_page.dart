@@ -48,12 +48,15 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
-          showModalBottomSheet(context: context, isScrollControlled: true, builder: (_) => MainModal());
+          showModalBottomSheet(
+            context: context,
+            useRootNavigator: true,
+            isScrollControlled: true,
+            builder: (_) => const MainModal(),
+          );
         },
         child: Icon(Ionicons.add, size: 28),
       ),
     );
   }
 }
-
-
