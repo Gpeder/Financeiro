@@ -38,6 +38,6 @@ class TransacaoModel {
         ? map['data']
         : DateTime.tryParse(map['data'] ?? '') ?? DateTime.now(),
     isDespesa: map['isDespesa'] ?? true,
-    description: map['description'] ?? '',
+    description: map['description'] ?? map['descricao'] ?? '',
   );
 }

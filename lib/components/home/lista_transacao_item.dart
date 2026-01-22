@@ -18,19 +18,14 @@ class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
   @override
   void initState() {
     super.initState();
-    carregarTransacoes();
+    _carregarDados();
   }
 
-  void carregarTransacoes() {
+  void _carregarDados() {
     final dados = _service.buscarTodas();
-
     setState(() {
-      transacoes = dados
-          .map((e) => TransacaoModel.fromMap(Map<String, dynamic>.from(e)))
-          .toList();
+      transacoes = dados.map((e) => TransacaoModel.fromMap(e)).toList();
     });
-
-    print('📦 Transações carregadas: ${transacoes.length}');
   }
 
   String _getIcon(String? categoria) {
@@ -64,6 +59,15 @@ class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
         Text('Últimas transações', style: AppTextStyles.text18),
         const SizedBox(height: 10),
 
+        if (transacoes.isEmpty)
+          const Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              'Nenhuma transação encontrada.',
+              style: AppTextStyles.text16,
+            ),
+          ),
+
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -71,14 +75,12 @@ class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
           itemBuilder: (context, index) {
             final item = transacoes[index];
             return TransacaoItem(
-              title: item.titulo ?? 'Sem título',
-              description: item.description ?? 'Sem descrição',
-              date: item.data != null
-                  ? DateFormat('dd/MM/yyyy').format(item.data!)
-                  : '',
-              value: (item.valor ?? 0).toStringAsFixed(2),
+              title: item.titulo,
+              description: item.categoria,
+              date: DateFormat('dd/MM/yyyy').format(item.data),
+              value: item.valor.toStringAsFixed(2),
               icon: _getIcon(item.categoria),
-              isDespesa: item.isDespesa ?? true,
+              isDespesa: item.isDespesa,
             );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 10),
