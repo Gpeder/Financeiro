@@ -20,6 +20,14 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ReceitaTotalState> _receitaKey = GlobalKey();
   final GlobalKey<CardValorTotalState> _saldoKey = GlobalKey();
 
+  Future<void> _atualizarTudo() async {
+    _listaKey.currentState?.carregarDados();
+    _graficoKey.currentState?.carregarDados();
+    _receitaKey.currentState?.carregarDados();
+    _saldoKey.currentState?.carregarDados();
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
+
   Future<void> _abrirModal() async {
     final result = await showModalBottomSheet<bool>(
       context: context,
@@ -29,10 +37,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     if (result == true) {
-      _listaKey.currentState?.carregarDados();
-      _graficoKey.currentState?.carregarDados();
-      _receitaKey.currentState?.carregarDados();
-      _saldoKey.currentState?.carregarDados();
+      _atualizarTudo();
     }
   }
 
@@ -57,9 +62,12 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Column(
+      body: RefreshIndicator(
+        onRefresh: _atualizarTudo,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
           children: [
             CardValorTotal(key: _saldoKey),
             SizedBox(height: 20),
@@ -70,6 +78,7 @@ class _HomePageState extends State<HomePage> {
             ListaTrasacaoItem(key: _listaKey),
           ],
         ),
+      ),
       ),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

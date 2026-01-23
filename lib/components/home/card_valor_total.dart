@@ -42,8 +42,18 @@ class CardValorTotalState extends State<CardValorTotal> {
 
   String _getMesAbreviado(int mes) {
     const meses = [
-      'jan', 'fev', 'mar', 'abr', 'mai', 'jun',
-      'jul', 'ago', 'set', 'out', 'nov', 'dez'
+      'jan',
+      'fev',
+      'mar',
+      'abr',
+      'mai',
+      'jun',
+      'jul',
+      'ago',
+      'set',
+      'out',
+      'nov',
+      'dez',
     ];
     return meses[mes - 1];
   }
@@ -85,7 +95,9 @@ class CardValorTotalState extends State<CardValorTotal> {
               ],
             ),
             Text(
-              _isVisivel ? 'R\$ ${Formatador.moedabr(saldoTotal)}' : 'R\$ *****',
+              _isVisivel
+                  ? 'R\$ ${Formatador.moedabr(saldoTotal)}'
+                  : 'R\$ *****',
               style: AppTextStyles.text30Bold.copyWith(
                 color: AppColors.background,
               ),

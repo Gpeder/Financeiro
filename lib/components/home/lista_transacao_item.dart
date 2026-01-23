@@ -4,7 +4,6 @@ import 'package:finceiro_app/model/transacao_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class ListaTrasacaoItem extends StatefulWidget {
   const ListaTrasacaoItem({super.key});
 
@@ -22,17 +21,22 @@ class ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
     carregarDados();
   }
 
+
+
   void carregarDados() {
     final dados = _service.buscarTodas();
     final agora = DateTime.now();
-    
+
     setState(() {
-      transacoes = dados
-          .map((e) => TransacaoModel.fromMap(e))
-          .where((t) => t.data.month == agora.month && t.data.year == agora.year)
-          .toList()
-        ..sort((a, b) => b.data.compareTo(a.data));
-      
+      transacoes =
+          dados
+              .map((e) => TransacaoModel.fromMap(e))
+              .where(
+                (t) => t.data.month == agora.month && t.data.year == agora.year,
+              )
+              .toList()
+            ..sort((a, b) => b.data.compareTo(a.data));
+
       if (transacoes.length > 10) {
         transacoes = transacoes.sublist(0, 10);
       }
@@ -41,7 +45,7 @@ class ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
 
   String _getIcon(String? categoria) {
     switch ((categoria ?? '').toLowerCase()) {
-      case 'salario mensal':
+      case 'salário':
         return '💰';
       case 'alimentação':
         return '🍔';
@@ -77,13 +81,13 @@ class ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
           ),
 
         ListView.separated(
-          shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(bottom: 20),
+          shrinkWrap: true,
           itemCount: transacoes.length,
           itemBuilder: (context, index) {
             final item = transacoes[index];
             return TransacaoItem(
-
               title: item.titulo,
               description: item.categoria,
               date: DateFormat('dd/MM/yyyy').format(item.data),
@@ -107,7 +111,6 @@ class TransacaoItem extends StatelessWidget {
   final String icon;
   final bool isDespesa;
 
-
   const TransacaoItem({
     super.key,
     required this.title,
@@ -116,7 +119,6 @@ class TransacaoItem extends StatelessWidget {
     required this.value,
     required this.icon,
     required this.isDespesa,
-
   });
 
   @override
