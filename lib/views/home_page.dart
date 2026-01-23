@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ListaTrasacaoItemState> _listaKey = GlobalKey();
   final GlobalKey<GraficoGastosState> _graficoKey = GlobalKey();
   final GlobalKey<ReceitaTotalState> _receitaKey = GlobalKey();
+  final GlobalKey<CardValorTotalState> _saldoKey = GlobalKey();
 
   Future<void> _abrirModal() async {
     final result = await showModalBottomSheet<bool>(
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
       _listaKey.currentState?.carregarDados();
       _graficoKey.currentState?.carregarDados();
       _receitaKey.currentState?.carregarDados();
+      _saldoKey.currentState?.carregarDados();
     }
   }
 
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
           children: [
-            CardValorTotal(),
+            CardValorTotal(key: _saldoKey),
             SizedBox(height: 20),
             ReceitaTotal(key: _receitaKey),
             SizedBox(height: 20),
