@@ -33,29 +33,20 @@ class Mascaras {
   static TextInputFormatter get moeda => CurrencyInputFormatter();
 }
 
-/// Formatter para moeda brasileira (Real)
-/// Digita 12 → 12
-/// Digita 1200 → 1.200
-/// Formata apenas com separador de milhar, sem decimais
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    // Remove tudo que não é dígito
-    String digits = newValue.text.replaceAll(RegExp(r'[^\d]'), '');
+    final digits = newValue.text.replaceAll(RegExp(r'\D'), '');
 
     if (digits.isEmpty) {
       return const TextEditingValue(text: '');
     }
 
-    // Remove zeros à esquerda (exceto se for só zero)
-    digits = digits.replaceFirst(RegExp(r'^0+(?=\d)'), '');
-    if (digits.isEmpty) digits = '0';
-
-    // Adiciona separador de milhar
-    String formatted = _formatarMilhar(digits);
+    final value = double.parse(digits) / 100;
+    final formatted = _format(value);
 
     return TextEditingValue(
       text: formatted,
@@ -63,21 +54,13 @@ class CurrencyInputFormatter extends TextInputFormatter {
     );
   }
 
-  String _formatarMilhar(String digits) {
-    if (digits.length <= 3) return digits;
-    
-    StringBuffer result = StringBuffer();
-    int count = 0;
-    
-    for (int i = digits.length - 1; i >= 0; i--) {
-      if (count > 0 && count % 3 == 0) {
-        result.write('.');
-      }
-      result.write(digits[i]);
-      count++;
-    }
-    
-    return result.toString().split('').reversed.join();
+  String _format(double value) {
+    final parts = value.toStringAsFixed(2).split('.');
+    final inteiro = parts[0].replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (m) => '${m[1]}.',
+    );
+    return '$inteiro,${parts[1]}';
   }
 }
 

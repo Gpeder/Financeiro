@@ -37,13 +37,17 @@ class _MainModalState extends State<MainModal> {
     super.dispose();
   }
 
+  double _parseMoeda(String value) {
+    return double.tryParse(value.replaceAll('.', '').replaceAll(',', '.')) ?? 0;
+  }
+
   Future<void> salvarDespesa() async {
     if (!_formDespesasKey.currentState!.validate()) return;
 
     final dados = {
       'id': DateTime.now().millisecondsSinceEpoch.toString(),
       'titulo': descricaoDespesasController.text,
-      'valor': double.tryParse(valorDespesasController.text.replaceAll('.', '').replaceAll(',', '.')) ?? 0,
+      'valor': _parseMoeda(valorDespesasController.text),
       'descricao': descricaoDespesasController.text,
       'categoria': categoriaDespesas,
       'data': dataDespesas,
@@ -62,7 +66,7 @@ class _MainModalState extends State<MainModal> {
     final dados = {
       'id': DateTime.now().millisecondsSinceEpoch.toString(),
       'titulo': descricaoReceitasController.text,
-      'valor': double.tryParse(valorReceitasController.text.replaceAll('.', '').replaceAll(',', '.')) ?? 0,
+      'valor': _parseMoeda(valorReceitasController.text),
       'descricao': descricaoReceitasController.text,
       'categoria': categoriaReceitas,
       'data': dataReceitas,
@@ -100,7 +104,7 @@ class _MainModalState extends State<MainModal> {
                           validator: (value) => value == null || value.isEmpty
                               ? 'Campo obrigatório'
                               : null,
-                          hint: 'R\$ 0,00',
+                          hint: 'R\$ 0',
                         ),
                         const SizedBox(height: 16),
 
@@ -206,7 +210,7 @@ class _MainModalState extends State<MainModal> {
                           validator: (value) => value == null || value.isEmpty
                               ? 'Campo obrigatório'
                               : null,
-                          hint: 'R\$ 0,00',
+                          hint: 'R\$ 0',
                         ),
                         const SizedBox(height: 16),
 
@@ -279,7 +283,6 @@ class _MainModalState extends State<MainModal> {
                             if (!mounted) return;
                             Navigator.pop(context, true);
                           },
-
                           child: const Text('Salvar Receita'),
                         ),
                       ],
