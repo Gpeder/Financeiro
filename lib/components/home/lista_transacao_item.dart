@@ -4,24 +4,25 @@ import 'package:finceiro_app/model/transacao_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+
 class ListaTrasacaoItem extends StatefulWidget {
   const ListaTrasacaoItem({super.key});
 
   @override
-  State<ListaTrasacaoItem> createState() => _ListaTrasacaoItemState();
+  State<ListaTrasacaoItem> createState() => ListaTrasacaoItemState();
 }
 
-class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
+class ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
   final TransacaoService _service = TransacaoService();
   List<TransacaoModel> transacoes = [];
 
   @override
   void initState() {
     super.initState();
-    _carregarDados();
+    carregarDados();
   }
 
-  void _carregarDados() {
+  void carregarDados() {
     final dados = _service.buscarTodas();
     setState(() {
       transacoes = dados.map((e) => TransacaoModel.fromMap(e)).toList();
@@ -32,7 +33,7 @@ class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
     switch ((categoria ?? '').toLowerCase()) {
       case 'salario mensal':
         return '💰';
-      case 'alimentacao':
+      case 'alimentação':
         return '🍔';
       case 'transporte':
         return '🚗';
@@ -62,10 +63,7 @@ class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
         if (transacoes.isEmpty)
           const Padding(
             padding: EdgeInsets.all(20),
-            child: Text(
-              'Nenhuma transação encontrada.',
-              style: AppTextStyles.text16,
-            ),
+            child: Text('Nenhuma transação encontrada.'),
           ),
 
         ListView.separated(
@@ -75,6 +73,7 @@ class _ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
           itemBuilder: (context, index) {
             final item = transacoes[index];
             return TransacaoItem(
+
               title: item.titulo,
               description: item.categoria,
               date: DateFormat('dd/MM/yyyy').format(item.data),
@@ -98,6 +97,7 @@ class TransacaoItem extends StatelessWidget {
   final String icon;
   final bool isDespesa;
 
+
   const TransacaoItem({
     super.key,
     required this.title,
@@ -106,25 +106,25 @@ class TransacaoItem extends StatelessWidget {
     required this.value,
     required this.icon,
     required this.isDespesa,
+
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8, right: 8),
       decoration: BoxDecoration(
         color: AppColors.card,
         border: Border.all(color: AppColors.border),
         borderRadius: BorderRadius.circular(14),
       ),
       child: ListTile(
-        onTap: () {},
         contentPadding: EdgeInsets.zero,
         leading: Text(icon, style: AppTextStyles.text20),
         title: Text(title, style: AppTextStyles.text16Bold),
         subtitle: Text(
           '$description - $date',
-          style: AppTextStyles.text14.copyWith(color: AppColors.foreground),
+          style: AppTextStyles.text14.copyWith(color: AppColors.onMuted),
         ),
         trailing: Text(
           '${isDespesa ? "-" : "+"} R\$ $value',

@@ -7,15 +7,37 @@ import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ListaTrasacaoItemState> _listaKey = GlobalKey();
+  final GlobalKey<GraficoGastosState> _graficoKey = GlobalKey();
+
+  Future<void> _abrirModal() async {
+    final result = await showModalBottomSheet<bool>(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      builder: (_) => const MainModal(),
+    );
+
+    if (result == true) {
+      _listaKey.currentState?.carregarDados();
+      _graficoKey.currentState?.carregarDados();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Column(
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Olá 👋',
@@ -32,29 +54,22 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: .symmetric(horizontal: 10, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
           children: [
             CardValorTotal(),
             SizedBox(height: 20),
             ReceitaTotal(),
             SizedBox(height: 20),
-            GraficoGastos(),
+            GraficoGastos(key: _graficoKey),
             SizedBox(height: 20),
-            ListaTrasacaoItem(),
+            ListaTrasacaoItem(key: _listaKey),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            useRootNavigator: true,
-            isScrollControlled: true,
-            builder: (_) => const MainModal(),
-          );
-        },
+        onPressed: _abrirModal,
         child: Icon(Ionicons.add, size: 28),
       ),
     );

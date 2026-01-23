@@ -1,3 +1,4 @@
+import 'package:finceiro_app/helper/format.dart';
 import 'package:finceiro_app/service/service.dart';
 import 'package:finceiro_app/widgets/main_form.dart';
 import 'package:finceiro_app/widgets/main_tabbar.dart';
@@ -42,7 +43,7 @@ class _MainModalState extends State<MainModal> {
     final dados = {
       'id': DateTime.now().millisecondsSinceEpoch.toString(),
       'titulo': descricaoDespesasController.text,
-      'valor': double.tryParse(valorDespesasController.text) ?? 0,
+      'valor': double.tryParse(valorDespesasController.text.replaceAll('.', '').replaceAll(',', '.')) ?? 0,
       'descricao': descricaoDespesasController.text,
       'categoria': categoriaDespesas,
       'data': dataDespesas,
@@ -61,7 +62,7 @@ class _MainModalState extends State<MainModal> {
     final dados = {
       'id': DateTime.now().millisecondsSinceEpoch.toString(),
       'titulo': descricaoReceitasController.text,
-      'valor': double.tryParse(valorReceitasController.text) ?? 0,
+      'valor': double.tryParse(valorReceitasController.text.replaceAll('.', '').replaceAll(',', '.')) ?? 0,
       'descricao': descricaoReceitasController.text,
       'categoria': categoriaReceitas,
       'data': dataReceitas,
@@ -94,7 +95,7 @@ class _MainModalState extends State<MainModal> {
                           label: 'Valor',
                           prefixIcon: const Icon(Ionicons.cash),
                           keyboardType: TextInputType.number,
-                          inputFormatters: [],
+                          inputFormatters: [Mascaras.moeda],
                           controller: valorDespesasController,
                           validator: (value) => value == null || value.isEmpty
                               ? 'Campo obrigatório'
@@ -182,7 +183,7 @@ class _MainModalState extends State<MainModal> {
                               return;
                             await salvarDespesa();
                             if (!mounted) return;
-                            Navigator.pop(context);
+                            Navigator.pop(context, true);
                           },
                           child: const Text('Salvar Despesa'),
                         ),
@@ -200,7 +201,7 @@ class _MainModalState extends State<MainModal> {
                           label: 'Valor',
                           prefixIcon: const Icon(Ionicons.cash),
                           keyboardType: TextInputType.number,
-                          inputFormatters: [],
+                          inputFormatters: [Mascaras.moeda],
                           controller: valorReceitasController,
                           validator: (value) => value == null || value.isEmpty
                               ? 'Campo obrigatório'
@@ -276,7 +277,7 @@ class _MainModalState extends State<MainModal> {
                               return;
                             await salvarReceita();
                             if (!mounted) return;
-                            Navigator.pop(context);
+                            Navigator.pop(context, true);
                           },
 
                           child: const Text('Salvar Receita'),
