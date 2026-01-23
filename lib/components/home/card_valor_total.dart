@@ -5,7 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
 class CardValorTotal extends StatefulWidget {
-  const CardValorTotal({super.key});
+  final bool isVisivel;
+  final VoidCallback onToggle;
+
+  const CardValorTotal({
+    super.key,
+    required this.isVisivel,
+    required this.onToggle,
+  });
 
   @override
   State<CardValorTotal> createState() => CardValorTotalState();
@@ -13,7 +20,6 @@ class CardValorTotal extends StatefulWidget {
 
 class CardValorTotalState extends State<CardValorTotal> {
   final TransacaoService _service = TransacaoService();
-  bool _isVisivel = true;
   double saldoTotal = 0;
 
   @override
@@ -81,12 +87,8 @@ class CardValorTotalState extends State<CardValorTotal> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isVisivel = !_isVisivel;
-                    });
-                  },
-                  icon: _isVisivel
+                  onPressed: widget.onToggle,
+                  icon: widget.isVisivel
                       ? Icon(Ionicons.eye_outline)
                       : Icon(Ionicons.eye_off_outline),
                   color: AppColors.background,
@@ -95,7 +97,7 @@ class CardValorTotalState extends State<CardValorTotal> {
               ],
             ),
             Text(
-              _isVisivel
+              widget.isVisivel
                   ? 'R\$ ${Formatador.moedabr(saldoTotal)}'
                   : 'R\$ *****',
               style: AppTextStyles.text30Bold.copyWith(

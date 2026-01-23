@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<GraficoGastosState> _graficoKey = GlobalKey();
   final GlobalKey<ReceitaTotalState> _receitaKey = GlobalKey();
   final GlobalKey<CardValorTotalState> _saldoKey = GlobalKey();
+  bool _isVisivel = true;
 
   Future<void> _atualizarTudo() async {
     _listaKey.currentState?.carregarDados();
@@ -69,9 +70,20 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
           children: [
-            CardValorTotal(key: _saldoKey),
+            CardValorTotal(
+              key: _saldoKey,
+              isVisivel: _isVisivel,
+              onToggle: () {
+                setState(() {
+                  _isVisivel = !_isVisivel;
+                });
+              },
+            ),
             SizedBox(height: 20),
-            ReceitaTotal(key: _receitaKey),
+            ReceitaTotal(
+              key: _receitaKey,
+              isVisivel: _isVisivel,
+            ),
             SizedBox(height: 20),
             GraficoGastos(key: _graficoKey),
             SizedBox(height: 20),

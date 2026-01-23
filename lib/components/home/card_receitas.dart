@@ -47,7 +47,9 @@ class CardReceitas extends StatelessWidget {
 }
 
 class ReceitaTotal extends StatefulWidget {
-  const ReceitaTotal({super.key});
+  final bool isVisivel;
+
+  const ReceitaTotal({super.key, required this.isVisivel});
 
   @override
   State<ReceitaTotal> createState() => ReceitaTotalState();
@@ -98,7 +100,9 @@ class ReceitaTotalState extends State<ReceitaTotal> {
             titulo: 'Receita',
             icon: Ionicons.trending_up,
             iconBgColor: AppColors.chart3,
-            valor: 'R\$ ${Formatador.moedabr(totalReceitas)}',
+            valor: widget.isVisivel
+                ? 'R\$ ${Formatador.moedabr(totalReceitas)}'
+                : 'R\$ *****',
           ),
         ),
         SizedBox(width: 10),
@@ -107,7 +111,9 @@ class ReceitaTotalState extends State<ReceitaTotal> {
             titulo: 'Despesas',
             icon: Ionicons.trending_down,
             iconBgColor: AppColors.destructive,
-            valor: 'R\$ ${Formatador.moedabr(totalDespesas)}',
+            valor: widget.isVisivel
+                ? 'R\$ ${Formatador.moedabr(totalDespesas)}'
+                : 'R\$ *****',
           ),
         ),
       ],
