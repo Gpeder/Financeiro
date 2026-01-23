@@ -6,7 +6,6 @@ import 'package:finceiro_app/theme/theme.dart';
 import 'package:finceiro_app/widgets/main_form.dart';
 import 'package:flutter/material.dart';
 
-
 class TransacoesPage extends StatefulWidget {
   const TransacoesPage({super.key});
 
@@ -39,8 +38,24 @@ class _TransacoesPageState extends State<TransacoesPage> {
     print('Transação removida com sucesso');
   }
 
+  final TextEditingController _textController = TextEditingController();
+  String _searchQuery = '';
+  String _selectedCategory = 'Todas';
+
+  List<TransacaoModel> get _transacoesFiltradas {
+    return transacoes.where((t) {
+      final matchesSearch = t.titulo.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          t.categoria.toLowerCase().contains(_searchQuery.toLowerCase());
+      final matchesCategory = _selectedCategory == 'Todas' ||
+          t.categoria == _selectedCategory;
+      return matchesSearch && matchesCategory;
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final filteredList = _transacoesFiltradas;
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -54,7 +69,7 @@ class _TransacoesPageState extends State<TransacoesPage> {
             ),
             SizedBox(height: 4),
             Text(
-              '${transacoes.length} transações registradas',
+              '${filteredList.length} transações registradas',
               style: AppTextStyles.text18.copyWith(color: AppColors.foreground),
             ),
           ],
@@ -67,18 +82,29 @@ class _TransacoesPageState extends State<TransacoesPage> {
           children: [
             SizedBox(height: 10),
             MainSearchBar(
-              controller: TextEditingController(),
+              keyboardType: TextInputType.text,
+              controller: _textController,
               hint: 'Buscar...',
               prefixIcon: Icon(Icons.search, color: AppColors.primary),
-              onChanged: (_) {},
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value;
+                });
+              },
             ),
             SizedBox(height: 20),
-            ListaFiltro(),
+            ListaFiltro(
+              onFilterChanged: (categoria) {
+                setState(() {
+                  _selectedCategory = categoria;
+                });
+              },
+            ),
             SizedBox(height: 20),
             Text('Resultados', style: AppTextStyles.text18),
             SizedBox(height: 10),
             TransacoesListaFilter(
-              transacoes: transacoes,
+              transacoes: filteredList,
               onRefresh: _carregarDados,
               onRemove: _removerTransacao,
             ),
@@ -88,4 +114,3 @@ class _TransacoesPageState extends State<TransacoesPage> {
     );
   }
 }
-

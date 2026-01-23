@@ -1,26 +1,33 @@
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class ListaFiltro extends StatelessWidget {
-  ListaFiltro({super.key});
+class ListaFiltro extends StatefulWidget {
+  final ValueChanged<String>? onFilterChanged;
 
-  final Map<String, bool> categoriasSelecionadas = {
-    'Todas': true,
-    'Alimentação': false,
-    'Transporte': false,
-    'Moradia': false,
-    'Saúde': false,
-    'Educação': false,
-    'Lazer': false,
-    'Compras': false,
-    'Assinaturas': false,
-    'Viagem': false,
-    'Investimentos': false,
-    'Contas': false,
-    'Outros': false,
-  };
+  const ListaFiltro({super.key, this.onFilterChanged});
 
-  final ScrollController _scrollController = ScrollController();
+  @override
+  State<ListaFiltro> createState() => _ListaFiltroState();
+}
+
+class _ListaFiltroState extends State<ListaFiltro> {
+  String _categoriaSelecionada = 'Todas';
+
+  final List<String> _categorias = [
+    'Todas',
+    'Alimentação',
+    'Transporte',
+    'Moradia',
+    'Saúde',
+    'Educação',
+    'Lazer',
+    'Compras',
+    'Assinaturas',
+    'Viagem',
+    'Investimentos',
+    'Contas',
+    'Outros',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +43,24 @@ class ListaFiltro extends StatelessWidget {
         thickness: 5,
         radius: const Radius.circular(10),
         thumbVisibility: true,
-        controller: _scrollController,
         child: ListView.separated(
-          controller: _scrollController,
           scrollDirection: Axis.horizontal,
-          itemCount: categoriasSelecionadas.length,
+          itemCount: _categorias.length,
           separatorBuilder: (context, index) => const SizedBox(width: 10),
           itemBuilder: (context, index) {
-            final categoria = categoriasSelecionadas.keys.elementAt(index);
-            final isSelected = categoriasSelecionadas[categoria]!;
+            final categoria = _categorias[index];
+            final isSelected = _categoriaSelecionada == categoria;
             return FiltroCategorias(
               categoria: categoria,
               selected: isSelected,
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  _categoriaSelecionada = categoria;
+                });
+                if (widget.onFilterChanged != null) {
+                  widget.onFilterChanged!(categoria);
+                }
+              },
             );
           },
         ),

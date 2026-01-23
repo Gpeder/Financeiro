@@ -88,8 +88,102 @@ class _MainModalState extends State<MainModal> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: MainTab(
-              labels: const ['Despesas', 'Receita'],
+              labels: const ['Receita', 'Despesa'],
               contents: [
+                SingleChildScrollView(
+                  child: Form(
+                    key: _formReceitasKey,
+                    child: Column(
+                      children: [
+                        MainForm(
+                          label: 'Valor',
+                          prefixIcon: const Icon(Ionicons.wallet),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [Mascaras.moeda],
+                          controller: valorReceitasController,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Campo obrigatório'
+                              : null,
+                          hint: 'R\$ 0',
+                        ),
+                        const SizedBox(height: 16),
+
+                        MainForm(
+                          label: 'Descrição',
+                          keyboardType: TextInputType.text,
+                          controller: descricaoReceitasController,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Campo obrigatório'
+                              : null,
+                          hint: 'Ex: Salário, bônus, etc...',
+                        ),
+                        const SizedBox(height: 16),
+
+                        MainSelect(
+                          label: 'Categoria',
+                          value: categoriaReceitas,
+                          onChanged: (value) {
+                            setState(() {
+                              categoriaReceitas = value;
+                            });
+                          },
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Campo obrigatório'
+                              : null,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'Salário',
+                              child: Text('Salário'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Investimentos',
+                              child: Text('Investimentos'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Bonus',
+                              child: Text('Bonus'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Outros',
+                              child: Text('Outros'),
+                            ),
+                          ],
+                          hint: 'Selecione uma categoria',
+                        ),
+                        const SizedBox(height: 16),
+
+                        MainDatePicker(
+                          label: 'Data',
+                          suffixIcon: const Icon(null),
+                          prefixIcon: const Icon(Ionicons.calendar),
+                          validator: (value) =>
+                              value == null ? 'Campo obrigatório' : null,
+                          onChanged: (value) {
+                            setState(() {
+                              dataReceitas = value;
+                            });
+                          },
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                          value: dataReceitas,
+                        ),
+                        const SizedBox(height: 20),
+
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (!_formReceitasKey.currentState!.validate())
+                              return;
+                            await salvarReceita();
+                            if (!mounted) return;
+                            Navigator.pop(context, true);
+                          },
+                          child: const Text('Salvar Receita'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 SingleChildScrollView(
                   child: Form(
                     key: _formDespesasKey,
@@ -97,7 +191,7 @@ class _MainModalState extends State<MainModal> {
                       children: [
                         MainForm(
                           label: 'Valor',
-                          prefixIcon: const Icon(Ionicons.cash),
+                          prefixIcon: const Icon(Ionicons.wallet),
                           keyboardType: TextInputType.number,
                           inputFormatters: [Mascaras.moeda],
                           controller: valorDespesasController,
@@ -190,100 +284,6 @@ class _MainModalState extends State<MainModal> {
                             Navigator.pop(context, true);
                           },
                           child: const Text('Salvar Despesa'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                SingleChildScrollView(
-                  child: Form(
-                    key: _formReceitasKey,
-                    child: Column(
-                      children: [
-                        MainForm(
-                          label: 'Valor',
-                          prefixIcon: const Icon(Ionicons.cash),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [Mascaras.moeda],
-                          controller: valorReceitasController,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Campo obrigatório'
-                              : null,
-                          hint: 'R\$ 0',
-                        ),
-                        const SizedBox(height: 16),
-
-                        MainForm(
-                          label: 'Descrição',
-                          keyboardType: TextInputType.text,
-                          controller: descricaoReceitasController,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Campo obrigatório'
-                              : null,
-                          hint: 'Ex: Salário, bônus, etc...',
-                        ),
-                        const SizedBox(height: 16),
-
-                        MainSelect(
-                          label: 'Categoria',
-                          value: categoriaReceitas,
-                          onChanged: (value) {
-                            setState(() {
-                              categoriaReceitas = value;
-                            });
-                          },
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Campo obrigatório'
-                              : null,
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'Salário',
-                              child: Text('Salário'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Investimentos',
-                              child: Text('Investimentos'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Bonus',
-                              child: Text('Bonus'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Outros',
-                              child: Text('Outros'),
-                            ),
-                          ],
-                          hint: 'Selecione uma categoria',
-                        ),
-                        const SizedBox(height: 16),
-
-                        MainDatePicker(
-                          label: 'Data',
-                          suffixIcon: const Icon(null),
-                          prefixIcon: const Icon(Ionicons.calendar),
-                          validator: (value) =>
-                              value == null ? 'Campo obrigatório' : null,
-                          onChanged: (value) {
-                            setState(() {
-                              dataReceitas = value;
-                            });
-                          },
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                          value: dataReceitas,
-                        ),
-                        const SizedBox(height: 20),
-
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (!_formReceitasKey.currentState!.validate())
-                              return;
-                            await salvarReceita();
-                            if (!mounted) return;
-                            Navigator.pop(context, true);
-                          },
-                          child: const Text('Salvar Receita'),
                         ),
                       ],
                     ),
