@@ -24,8 +24,18 @@ class ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
 
   void carregarDados() {
     final dados = _service.buscarTodas();
+    final agora = DateTime.now();
+    
     setState(() {
-      transacoes = dados.map((e) => TransacaoModel.fromMap(e)).toList();
+      transacoes = dados
+          .map((e) => TransacaoModel.fromMap(e))
+          .where((t) => t.data.month == agora.month && t.data.year == agora.year)
+          .toList()
+        ..sort((a, b) => b.data.compareTo(a.data));
+      
+      if (transacoes.length > 10) {
+        transacoes = transacoes.sublist(0, 10);
+      }
     });
   }
 

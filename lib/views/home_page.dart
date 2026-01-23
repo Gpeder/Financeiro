@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ListaTrasacaoItemState> _listaKey = GlobalKey();
   final GlobalKey<GraficoGastosState> _graficoKey = GlobalKey();
+  final GlobalKey<ReceitaTotalState> _receitaKey = GlobalKey();
 
   Future<void> _abrirModal() async {
     final result = await showModalBottomSheet<bool>(
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     if (result == true) {
       _listaKey.currentState?.carregarDados();
       _graficoKey.currentState?.carregarDados();
+      _receitaKey.currentState?.carregarDados();
     }
   }
 
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             CardValorTotal(),
             SizedBox(height: 20),
-            ReceitaTotal(),
+            ReceitaTotal(key: _receitaKey),
             SizedBox(height: 20),
             GraficoGastos(key: _graficoKey),
             SizedBox(height: 20),

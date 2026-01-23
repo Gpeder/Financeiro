@@ -1,3 +1,5 @@
+import 'package:finceiro_app/helper/format.dart';
+import 'package:finceiro_app/service/service.dart';
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
@@ -25,9 +27,9 @@ class CardReceitas extends StatelessWidget {
       ),
       child: ListTile(
         horizontalTitleGap: 10,
-        contentPadding: .symmetric(horizontal: 10, vertical: 12),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         leading: Container(
-          padding: .symmetric(horizontal: 8, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: iconBgColor,
@@ -44,10 +46,48 @@ class CardReceitas extends StatelessWidget {
   }
 }
 
-class ReceitaTotal extends StatelessWidget {
-  const ReceitaTotal({
-    super.key,
-  });
+class ReceitaTotal extends StatefulWidget {
+  const ReceitaTotal({super.key});
+
+  @override
+  State<ReceitaTotal> createState() => ReceitaTotalState();
+}
+
+class ReceitaTotalState extends State<ReceitaTotal> {
+  final TransacaoService _service = TransacaoService();
+  double totalReceitas = 0;
+  double totalDespesas = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    carregarDados();
+  }
+
+  void carregarDados() {
+    final transacoes = _service.buscarTodas();
+    final agora = DateTime.now();
+
+    double receitas = 0;
+    double despesas = 0;
+
+    for (var t in transacoes) {
+      final data = t['data'];
+      if (data is DateTime && data.month == agora.month && data.year == agora.year) {
+        final valor = (t['valor'] ?? 0).toDouble();
+        if (t['isDespesa'] == true) {
+          despesas += valor;
+        } else {
+          receitas += valor;
+        }
+      }
+    }
+
+    setState(() {
+      totalReceitas = receitas;
+      totalDespesas = despesas;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +98,7 @@ class ReceitaTotal extends StatelessWidget {
             titulo: 'Receita',
             icon: Ionicons.trending_up,
             iconBgColor: AppColors.chart3,
-            valor: '\$5,000.00',
+            valor: 'R\$ ${Formatador.moedabr(totalReceitas)}',
           ),
         ),
         SizedBox(width: 10),
@@ -67,7 +107,7 @@ class ReceitaTotal extends StatelessWidget {
             titulo: 'Despesas',
             icon: Ionicons.trending_down,
             iconBgColor: AppColors.destructive,
-            valor: '\$5,000.00',
+            valor: 'R\$ ${Formatador.moedabr(totalDespesas)}',
           ),
         ),
       ],
