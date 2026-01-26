@@ -1,47 +1,54 @@
-Financeiro App 💰
-Um aplicativo de gestão financeira desenvolvido em Flutter para controle de transações, faturamento e resumo de gastos com uma interface moderna e responsiva.
+# Financeiro App 💰
 
-🚀 Tecnologias e Frameworks
-Flutter: Framework principal.
+Um aplicativo de gestão financeira completo, desenvolvido em **Flutter**. Focado em controle de transações, faturamento e resumo de gastos, entregando uma interface moderna, fluida e totalmente responsiva.
 
-Dart: Linguagem de programação.
+---
 
-Google Fonts: Fontes Plus Jakarta Sans (títulos) e Inter (corpo).
+## 📱 Screenshots
 
-📦 Bibliotecas Principais
-auto_size_text: Para textos que se ajustam automaticamente ao layout.
+| Home | Transações | Perfil | Modal | Resumo | Opções |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/61b2ed89-e013-41d2-8ce5-72402f9738a0" width="150" /> | <img src="https://github.com/user-attachments/assets/04cf61a2-831d-4fd4-b49f-7d47ceac3b0c" width="150" /> | <img src="https://github.com/user-attachments/assets/e81ed78d-adb4-4909-a13e-30ab329b59b9" width="150" /> | <img src="https://github.com/user-attachments/assets/7502778f-01de-427d-a7f0-d243cfa67cb0" width="150" /> | <img src="https://github.com/user-attachments/assets/a39ce5e0-b14b-4784-974e-45ff6faf977e" width="150" /> | <img src="https://github.com/user-attachments/assets/1ab71b85-3692-4cce-8d0d-39c5954e6f02" width="150" /> |
 
-fl_chart: (Se estiver usando) Para os gráficos de resumo mensal.
+---
 
-📂 Organização do Projeto
-O código está dividido de forma modular para facilitar a manutenção:
+## 🚀 Tecnologias e Frameworks
 
-lib/views: As telas principais do app (Home, Transações, Perfil).
+* **Flutter & Dart:** Base do projeto.
+* **Google Fonts:** Tipografia com *Plus Jakarta Sans* e *Inter*.
 
-lib/components: Partes menores das telas, como os cards de receitas e gráficos.
+## 📦 Bibliotecas Principais
 
-lib/widgets: Componentes globais reutilizáveis (botões, formulários, alertas).
+* **auto_size_text:** Ajuste automático de texto para não quebrar o layout.
+* **fl_chart:** Gráficos interativos de faturamento.
+* **phosphor_flutter:** Pacote de ícones modernos.
+* **shimmer:** Efeito visual de carregamento.
+* **intl:** Formatação de moedas e datas.
 
-lib/theme: Configuração centralizada de cores e estilos de texto (AppTextStyles).
+---
 
-lib/model: Definição das classes de dados (ex: TransacaoModel).
+## 📂 Organização do Projeto
 
-lib/service: Lógica de comunicação e manipulação de dados.
+* `lib/views`: Telas principais do aplicativo.
+* `lib/components`: Partes menores das telas (cards, filtros).
+* `lib/widgets`: Componentes reutilizáveis (botões e campos).
+* `lib/theme`: Configuração de cores e estilos (`AppTextStyles`).
+* `lib/model`: Classes de dados.
+* `lib/service`: Lógica e processamento de dados.
 
-✨ Funcionalidades
-Resumo financeiro na tela inicial.
+---
 
-Listagem de transações com filtros por categoria.
+## ✨ Funcionalidades
 
-Gráficos interativos de gastos.
+* **Resumo Financeiro:** Dashboard com saldo e gastos.
+* **Listagem de Transações:** Histórico com filtros por categoria.
+* **Gráficos:** Análise visual de receitas e despesas.
+* **Interface Responsiva:** Adaptado para diversos tamanhos de celular.
 
-Interface totalmente responsiva (não quebra em telas menores).
+---
 
-Suporte a Temas (Configurações de cores centralizadas).
-<img width="1080" height="2400" alt="Screenshot_1769430562" src="https://github.com/user-attachments/assets/61b2ed89-e013-41d2-8ce5-72402f9738a0" />
-<img width="1080" height="2400" alt="Screenshot_1769430580" src="https://github.com/user-attachments/assets/04cf61a2-831d-4fd4-b49f-7d47ceac3b0c" />
-<img width="1080" height="2400" alt="Screenshot_1769430573" src="https://github.com/user-attachments/assets/e81ed78d-adb4-4909-a13e-30ab329b59b9" />
-<img width="1080" height="2400" alt="Screenshot_1769430570" src="https://github.com/user-attachments/assets/7502778f-01de-427d-a7f0-d243cfa67cb0" />
-<img width="1080" height="2400" alt="Screenshot_1769430566" src="https://github.com/user-attachments/assets/a39ce5e0-b14b-4784-974e-45ff6faf977e" />
-<img width="1080" height="2400" alt="Screenshot_1769430564" src="https://github.com/user-attachments/assets/1ab71b85-3692-4cce-8d0d-39c5954e6f02" />
+## 🛠️ Como rodar o projeto
 
+1. Clone o repositório.
+2. Rode `flutter pub get` no terminal.
+3. Rode `flutter run`.
