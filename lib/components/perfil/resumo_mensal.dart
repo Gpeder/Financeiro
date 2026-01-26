@@ -37,6 +37,9 @@ class ResumoMensalState extends State<ResumoMensal> {
       }
     }
 
+    double localReceitas = 0;
+    double localDespesas = 0;
+
     for (var t in transacoes) {
       final data = t['data'];
       if (data is DateTime &&
@@ -44,17 +47,17 @@ class ResumoMensalState extends State<ResumoMensal> {
           data.year == agora.year) {
         final valor = (t['valor'] ?? 0).toDouble();
         if (t['isDespesa'] == true) {
-          despesas += valor;
+          localDespesas += valor;
         } else {
-          receitas += valor;
+          localReceitas += valor;
         }
       }
     }
 
     setState(() {
       saldoTotal = total;
-      receitas = receitas;
-      despesas = despesas;
+      receitas = localReceitas;
+      despesas = localDespesas;
     });
   }
 

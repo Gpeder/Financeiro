@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:finceiro_app/service/service.dart';
 import 'package:finceiro_app/theme/theme.dart';
 import 'package:finceiro_app/model/transacao_model.dart';
@@ -20,8 +21,6 @@ class ListaTrasacaoItemState extends State<ListaTrasacaoItem> {
     super.initState();
     carregarDados();
   }
-
-
 
   void carregarDados() {
     final dados = _service.buscarTodas();
@@ -138,7 +137,9 @@ class TransacaoItem extends StatelessWidget {
           '$description - $date',
           style: AppTextStyles.text14.copyWith(color: AppColors.onMuted),
         ),
-        trailing: Text(
+        trailing: AutoSizeText(
+          maxLines: 1,
+          minFontSize: 12,
           '${isDespesa ? "-" : "+"} R\$ $value',
           style: AppTextStyles.text16Bold.copyWith(
             color: isDespesa ? Colors.red : AppColors.chart3,

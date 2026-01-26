@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:finceiro_app/helper/format.dart';
 import 'package:finceiro_app/service/service.dart';
 import 'package:finceiro_app/theme/theme.dart';
@@ -36,10 +37,19 @@ class CardReceitas extends StatelessWidget {
           ),
           child: Icon(icon, size: 16, color: AppColors.background),
         ),
-        title: Text(titulo, style: AppTextStyles.text18),
-        subtitle: Text(
+        title: AutoSizeText(
+          titulo,
+          style: AppTextStyles.text18,
+          minFontSize: 12,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: AutoSizeText(
           valor,
           style: AppTextStyles.text20Bold.copyWith(color: iconBgColor),
+          minFontSize: 14,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

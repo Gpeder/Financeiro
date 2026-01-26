@@ -109,6 +109,8 @@ class _MainModalState extends State<MainModal> {
                         const SizedBox(height: 16),
 
                         MainForm(
+                          maxLines: 1,
+                          maxLength: 20,
                           label: 'Descrição',
                           keyboardType: TextInputType.text,
                           controller: descricaoReceitasController,
@@ -203,6 +205,8 @@ class _MainModalState extends State<MainModal> {
                         const SizedBox(height: 16),
 
                         MainForm(
+                          maxLines: 1,
+                          maxLength: 20,
                           label: 'Descrição',
                           keyboardType: TextInputType.text,
                           controller: descricaoDespesasController,

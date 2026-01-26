@@ -58,6 +58,7 @@ class _TransacoesPageState extends State<TransacoesPage> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
